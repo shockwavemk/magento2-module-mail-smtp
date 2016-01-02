@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright 2016 Shockwave-Design - J. & M. Kramer, all rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <section id="system">
+            <group id="smtp">
+                <field id="host" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <comment><![CDATA[]]></comment>
+                    <depends>
+                        <field id="type">smtp</field>
+                    </depends>
+                </field>
+
+                <field id="port" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <comment><![CDATA[]]></comment>
+                    <depends>
+                        <field id="type">smtp</field>
+                    </depends>
+                </field>
+
+                <field id="authentication" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Authentication</label>
+                    <source_model>Shockwavemk\Mail\Smtp\Model\Config\Source\Smtp\Authentication</source_model>
+                    <depends>
+                        <field id="type">smtp</field>
+                    </depends>
+                </field>
+
+                <field id="username" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Username</label>
+                    <depends>
+                        <field id="type">smtp</field>
+                    </depends>
+                </field>
+
+                <field id="password" translate="label" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Password</label>
+                    <depends>
+                        <field id="type">smtp</field>
+                    </depends>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+
+                <field id="ssl" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>SSL Security</label>
+                    <depends>
+                        <field id="type">smtp</field>
+                    </depends>
+                    <source_model>Shockwavemk\Mail\Smtp\Model\Config\Source\Smtp\Ssl</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
+

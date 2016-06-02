@@ -12,6 +12,9 @@ class SmtpTransport extends \Zend_Mail_Transport_Smtp implements \Magento\Framew
      */
     protected $_message;
 
+    /** @var  \Shockwavemk\Mail\Base\Model\Mail */
+    protected $_mail;
+
     /**
      *
      *
@@ -48,5 +51,15 @@ class SmtpTransport extends \Zend_Mail_Transport_Smtp implements \Magento\Framew
                 $e)
             ;
         }
+    }
+
+    /**
+     * @param mixed $mail
+     * @return \Shockwavemk\Mail\Base\Model\Transports\TransportInterface
+     */
+    public function setMail($mail)
+    {
+        $this->_mail = $mail;
+        return $this;
     }
 }

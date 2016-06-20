@@ -21,6 +21,7 @@ class SmtpTransport extends \Zend_Mail_Transport_Smtp implements \Magento\Framew
      * @param \Shockwavemk\Mail\Smtp\Model\Config $config
      * @param \Magento\Framework\Mail\MessageInterface $message
      * @param null $parameters
+     * @throws \InvalidArgumentException
      */
     public function __construct(
         \Shockwavemk\Mail\Smtp\Model\Config $config,
@@ -31,7 +32,11 @@ class SmtpTransport extends \Zend_Mail_Transport_Smtp implements \Magento\Framew
             throw new \InvalidArgumentException('The message should be an instance of \Zend_Mail');
         }
 
-        parent::__construct($config->getHost(), $config->getSmtpParameters());
+        parent::__construct(
+            $config->getHost(), 
+            $config->getSmtpParameters()
+        );
+        
         $this->_message = $message;
     }
 
@@ -44,7 +49,17 @@ class SmtpTransport extends \Zend_Mail_Transport_Smtp implements \Magento\Framew
     public function sendMessage()
     {
         try {
+            $attachments = $this->_mail->getAttachments();
+
+            /** @noinspection IsEmptyFunctionUsageInspection */
+            if(!empty($attachments)) {
+                foreach ($attachments as $attachment) {
+                    $this->_message->addAttachment($attachment->toMimePart());
+                }
+            }
+
             parent::send($this->_message);
+            
         } catch (\Exception $e) {
             throw new \Magento\Framework\Exception\MailException(
                 new \Magento\Framework\Phrase($e->getMessage()),

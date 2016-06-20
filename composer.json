@@ -2,7 +2,7 @@
     "name": "shockwavemk/magento2-module-mail-smtp",
     "description": "Extending shockwavemk mail module by smtp host configuration",
     "require": {
-        "shockwavemk/magento2-module-mail": "dev-master"
+        "shockwavemk/magento2-module-mail": "*"
     },
     "type": "magento2-module",
     "license": [

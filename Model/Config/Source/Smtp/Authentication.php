@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright © 2015 Martin Kramer. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright 2016 Shockwave-Design - J. & M. Kramer, all rights reserved.
+ * See LICENSE.txt for license details.
  */
 namespace Shockwavemk\Mail\Smtp\Model\Config\Source\Smtp;
 

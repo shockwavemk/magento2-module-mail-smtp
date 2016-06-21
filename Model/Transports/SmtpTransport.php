@@ -69,12 +69,44 @@ class SmtpTransport extends \Zend_Mail_Transport_Smtp implements \Magento\Framew
     }
 
     /**
+     * Returns wrapped mail object
+     *
+     * @return \Shockwavemk\Mail\Base\Model\Mail
+     */
+    public function getMail()
+    {
+        return $this->_mail;
+    }
+
+    /**
      * @param mixed $mail
      * @return \Shockwavemk\Mail\Base\Model\Transports\TransportInterface
      */
     public function setMail($mail)
     {
         $this->_mail = $mail;
+        return $this;
+    }
+
+    /**
+     * Returns wrapped message
+     *
+     * @return \Zend_Mail
+     */
+    public function getMessage()
+    {
+        return $this->_message;
+    }
+
+    /**
+     * Assign wrapped message
+     *
+     * @param \Zend_Mail $message
+     * @return \Shockwavemk\Mail\Base\Model\Transports\TransportInterface
+     */
+    public function setMessage($message)
+    {
+        $this->_message = $message;
         return $this;
     }
 }

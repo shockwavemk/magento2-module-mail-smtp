@@ -13,7 +13,7 @@ class SmtpTransport extends \Zend_Mail_Transport_Smtp implements \Magento\Framew
     protected $_message;
 
     /** @var  \Shockwavemk\Mail\Base\Model\Mail */
-    protected $_mail;
+    protected $_magentoMail;
 
     /**
      *
@@ -33,10 +33,10 @@ class SmtpTransport extends \Zend_Mail_Transport_Smtp implements \Magento\Framew
         }
 
         parent::__construct(
-            $config->getHost(), 
+            $config->getHost(),
             $config->getSmtpParameters()
         );
-        
+
         $this->_message = $message;
     }
 
@@ -49,7 +49,7 @@ class SmtpTransport extends \Zend_Mail_Transport_Smtp implements \Magento\Framew
     public function sendMessage()
     {
         try {
-            $attachments = $this->_mail->getAttachments();
+            $attachments = $this->getMail()->getAttachments();
 
             /** @noinspection IsEmptyFunctionUsageInspection */
             if(!empty($attachments)) {
@@ -59,7 +59,7 @@ class SmtpTransport extends \Zend_Mail_Transport_Smtp implements \Magento\Framew
             }
 
             parent::send($this->_message);
-            
+
         } catch (\Exception $e) {
             throw new \Magento\Framework\Exception\MailException(
                 new \Magento\Framework\Phrase($e->getMessage()),
@@ -75,7 +75,7 @@ class SmtpTransport extends \Zend_Mail_Transport_Smtp implements \Magento\Framew
      */
     public function getMail()
     {
-        return $this->_mail;
+        return $this->_magentoMail;
     }
 
     /**
@@ -84,7 +84,7 @@ class SmtpTransport extends \Zend_Mail_Transport_Smtp implements \Magento\Framew
      */
     public function setMail($mail)
     {
-        $this->_mail = $mail;
+        $this->_magentoMail = $mail;
         return $this;
     }
 

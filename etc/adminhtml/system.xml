@@ -25,7 +25,7 @@
 
                 <field id="authentication" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Authentication</label>
-                    <source_model>Shockwavemk\Mail\Smtp\Model\Config\Source\Smtp\Authentication</source_model>
+                    <source_model>\Shockwavemk\Mail\Smtp\Model\Config\Source\Smtp\Authentication</source_model>
                     <depends>
                         <field id="type">smtp</field>
                     </depends>
@@ -43,7 +43,7 @@
                     <depends>
                         <field id="type">smtp</field>
                     </depends>
-                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <backend_model>\Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                 </field>
 
                 <field id="ssl" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -51,7 +51,7 @@
                     <depends>
                         <field id="type">smtp</field>
                     </depends>
-                    <source_model>Shockwavemk\Mail\Smtp\Model\Config\Source\Smtp\Ssl</source_model>
+                    <source_model>\Shockwavemk\Mail\Smtp\Model\Config\Source\Smtp\Ssl</source_model>
                 </field>
             </group>
         </section>

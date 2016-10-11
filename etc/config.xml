@@ -19,7 +19,7 @@
                 <smtp>
                     <label>Smtp</label>
                     <value>smtp</value>
-                    <class>Shockwavemk\Mail\Smtp\Model\Transports\SmtpTransport</class>
+                    <class>\Shockwavemk\Mail\Smtp\Model\Transports\SmtpTransport</class>
                 </smtp>
             </types>
         </transport>

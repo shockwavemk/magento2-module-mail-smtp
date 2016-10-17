@@ -16,16 +16,24 @@ class SmtpTransport extends \Zend_Mail_Transport_Smtp implements \Magento\Framew
     protected $_magentoMail;
 
     /**
+     * @var \Magento\Framework\Stdlib\DateTime
+     */
+    protected $_dateTime;
+
+
+    /**
      *
      *
      * @param \Shockwavemk\Mail\Smtp\Model\Config $config
      * @param \Magento\Framework\Mail\MessageInterface $message
+     * @param \Magento\Framework\Stdlib\DateTime $dateTime
      * @param null $parameters
      * @throws \InvalidArgumentException
      */
     public function __construct(
         \Shockwavemk\Mail\Smtp\Model\Config $config,
         \Magento\Framework\Mail\MessageInterface $message,
+        \Magento\Framework\Stdlib\DateTime $dateTime,
         $parameters = null)
     {
         if (!$message instanceof \Zend_Mail) {
@@ -38,6 +46,7 @@ class SmtpTransport extends \Zend_Mail_Transport_Smtp implements \Magento\Framew
         );
 
         $this->_message = $message;
+        $this->_dateTime = $dateTime;
     }
 
     /**
@@ -58,7 +67,14 @@ class SmtpTransport extends \Zend_Mail_Transport_Smtp implements \Magento\Framew
                 }
             }
 
+            $this->getMail()
+                ->setSent(false)
+                ->setSentAt($this->createSentAt())
+                ->setTransportId(uniqid($this->_message->getSubject(), true));
+
             parent::send($this->_message);
+
+            $this->getMail()->setSent(true);
 
         } catch (\Exception $e) {
             throw new \Magento\Framework\Exception\MailException(
@@ -108,5 +124,15 @@ class SmtpTransport extends \Zend_Mail_Transport_Smtp implements \Magento\Framew
     {
         $this->_message = $message;
         return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function createSentAt()
+    {
+        return $this->_dateTime->formatDate(
+            new \DateTime()
+        );
     }
 }

@@ -33,8 +33,10 @@ On succeed, install the module via bin/magento console.
 ```bash
 
     bin/magento cache:clean
-
-    bin/magento module:install Shockwavemk_Mail_Smtp
+    
+    bin/magento module:enable Shockwavemk_Mail_Base
+    
+    bin/magento module:enable Shockwavemk_Mail_Smtp
 
     bin/magento setup:upgrade
 
